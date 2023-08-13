@@ -4,6 +4,12 @@
 <%@page import="java.sql.ResultSet" %>
 
 <%
+    if(session.getAttribute("teacher_id") == null){
+        response.sendRedirect("teacher-login.jsp");
+    }
+%>
+
+<%
     String teacher_id = String.valueOf(session.getAttribute("teacher_id"));
 
     Connection con = DBConnector.getConnection();
@@ -40,12 +46,13 @@
 
                 <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link" aria-current="page" href="index.html">Main - Home</a>
-                        <a class="nav-link active" aria-current="page" href="teacher-index.jsp">Teacher - Home</a>                 
+                        <a class="nav-link" aria-current="page" href="index.jsp">Main - Home</a>
+                        <a class="nav-link active" aria-current="page" href="teacher-index.jsp">Teacher - Home</a> 
+                        <a class="nav-link" aria-current="page" href="teacher-settings.jsp">Settings</a>
                     </div>
 
                     <div class="d-flex ms-auto order-5">
-                        <form method="POST" action="process-logout.jsp?redirect=1">
+                        <form method="POST" action="process-logout.jsp">
                             <input type="submit" class="btn btn-primary me-3" value="Logout"/>
                         </form>                     
                     </div>
@@ -153,7 +160,7 @@
                         <h3 class="h3"><% out.println(rs.getString("subject_level") + " - " + rs.getString("subject_category"));  %></h3>
                     </div>
                     <div class="col ms-auto text-end">
-                        <button class="btn btn-info" onclick="location.href='teacher-quiz.jsp?subject_id=<%=curr%>'">Add New Quiz</button>
+                        <button class="btn btn-info" onclick="location.href='teacher-quiz.jsp?subject_id=<%= request.getParameter("sid") %>'">Add New Quiz</button>
                     </div>    
                 </div>
 
@@ -162,7 +169,7 @@
                         <div class="container mt-3 mb-3">
                             <div class="cards">
                                 <div class="row">
-                                    <div class="col text-center">
+                                    <div class="col-md text-center">
                                         <h5 class="h5 mt-2"><% out.println(rs.getString("quiz_title")); %></h5>
                                     </div>
                                     <div class="col text-center">
@@ -177,10 +184,10 @@
                                             %>
                                         </p>
                                     </div>
-                                    <div class="col text-center">
-                                        <button class="btn btn-primary mt-2" onclick="location.href = 'view-quiz.html'">View Quiz</button>
+                                    <div class="col-md text-center">
+                                        <button class="btn btn-primary mt-2" onclick="location.href = 'teacher-view-quiz.jsp?quiz_id=<%= rs.getString("quiz_id") %>'">View Quiz</button>
                                         <button class="btn btn-primary mt-2">Show Leaderboard</button>
-                                        <button class="btn btn-primary mt-2">Edit Quiz</button>
+                                        <button class="btn btn-primary mt-2" onclick="location.href = 'teacher-edit-quiz.jsp?quiz_id=<%= rs.getString("quiz_id") %>'">Edit Quiz</button>                                     
                                     </div>  
                                 </div>
                             </div>
@@ -228,6 +235,7 @@
             }
         }
     </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>

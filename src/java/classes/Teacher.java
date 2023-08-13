@@ -5,7 +5,6 @@ package classes;
  * @author sanjanaattanayake
  */
 
-import classes.MD5;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,7 +65,6 @@ public class Teacher {
                 status = a > 0;
             }
             else{
-                //first_name, String last_name, String email, String username, String password, String education, String school
                 String query = "INSERT INTO teacher(first_name, last_name, email, username, password, education,school) VALUES(?,?,?,?,?,?,?)";
                 PreparedStatement pstmt = con.prepareStatement(query);
                 pstmt.setString(1, this.first_name);

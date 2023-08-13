@@ -64,7 +64,7 @@
                 %>
                 <p class="text-danger mt-3"><%= msg %></p>
                 
-                <form method="POST" action="process-teacher-quiz.jsp">
+                <form method="POST" action="process-add-quiz.jsp">
                     <input type="hidden" name="tot_ques" value="" id="tot_ques"/>
                     <input type="hidden" name="subject_id" value="<%= request.getParameter("subject_id") %>" id="subject_id"/>
                     

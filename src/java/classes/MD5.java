@@ -11,10 +11,10 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  *
- * @author HP
+ * @author Acer
  */
-
 public class MD5 {
+
     public static String getMd5(String input) {
         try {
 

@@ -7,11 +7,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    if(request.getParameter("redirect") != null){
-        String pg = request.getParameter("redirect");
-        if(pg.equals("1")){
-            session.invalidate(); 
-            response.sendRedirect("teacher-login.jsp");        
-        } 
-    }  
+    if(session.getAttribute("teacher_id") != null){
+        session.invalidate();
+        response.sendRedirect("teacher-login.jsp");
+    }
+    else if(session.getAttribute("student_id") != null){
+        session.invalidate();
+        response.sendRedirect("student-login.jsp");
+    }
+    else{
+        response.sendRedirect("student-login.jsp");
+    }
 %>

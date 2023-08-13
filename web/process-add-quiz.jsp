@@ -39,7 +39,7 @@
                 status = false;
                 response.sendRedirect("teacher-quiz.jsp?error=3");
             }
-            else if(!correct.equals("1") || !correct.equals("2") || !correct.equals("3") || !correct.equals("4")){
+            else if(!correct.equals("1") && !correct.equals("2") && !correct.equals("3") && !correct.equals("4")){
                 status = false;
                 response.sendRedirect("teacher-quiz.jsp?error=4");
             }

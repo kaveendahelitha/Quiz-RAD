@@ -1,3 +1,11 @@
+<%-- 
+    Document   : process-logout
+    Created on : Jul 31, 2023, 8:26:03 AM
+    Author     : sanjanaattanayake
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,21 +25,40 @@
         <!-- NAVBAR -->
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <div class="container-fluid nav">
-                <a class="navbar-brand" href="index.html">WeQuiz</a>
+                <a class="navbar-brand" href="index.jsp">WeQuiz</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                        <a class="nav-link" href="student-quizzes.html">Quizzes</a>
-                        <a class="nav-link" href="student-educators.html">Educators</a>               
+                        <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+                        <a class="nav-link" href="student-quizzes.jsp">Quizzes</a>
+                        <a class="nav-link" href="student-educators.jsp">Educators</a> 
+                        <a class="nav-link" href="student-settings.jsp">Settings</a>        
+                        <%
+                            if(session.getAttribute("teacher_id") != null){
+                            %>
+                                <p class="h5 ms-auto"><a class="nav-link" href="teacher-index.jsp">Teacher - Home</a></p>
+                            <%
+                            }
+                        %>
                     </div>
 
                     <div class="d-flex ms-auto order-5">
-                        <button type="button" class="btn btn-primary me-3" onclick="location.href = 'student-login.html'">Login</button>
-                        <button type="button" class="btn btn-primary me-3" onclick="location.href = 'teacher-login.jsp'">For Educators</button>
+                        <%
+                            if(session.getAttribute("teacher_id") == null && session.getAttribute("student_id") == null){
+                            %>
+                                <button type="button" class="btn btn-primary me-3" onclick="location.href = 'student-login.jsp'">Login</button>
+                                <button type="button" class="btn btn-primary me-3" onclick="location.href = 'teacher-login.jsp'">For Educators</button>
+                            <%
+                            }
+                            else{
+                            %>
+                                <button type="button" class="btn btn-primary me-3" onclick="location.href = 'process-logout.jsp'">Logout</button>
+                            <%
+                            }
+                        %>                                           
                     </div>
                 </div>
             </div>
